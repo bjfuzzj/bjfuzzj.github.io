@@ -2,10 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>在线简历</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen">
 <link rel="stylesheet" href="stylesheets/responsive.css" type="text/css" media="screen">
 <link rel="stylesheet" href="stylesheets/colorbox.css" type="text/css" media="screen">
+
 <style>
 	div.head p.lead{
 		float:left;
@@ -31,20 +35,54 @@
 	</script>
 </head>
 <body>
-<div class="container">
-	<div class="head">
+<div class="container lead">
+	<div class="head row">
 	  <h1>个人简历主页</h1><br>
-	  <div style="float:left;">
-		<img src="./images/touxiang.jpg" style="height: 236px;width: 207px;float: left;">
+	  <div class="col-md-3">
+		<img src="./images/touxiang.jpg" style="height: 236px;width: 207px;">
 	  </div>
+	  <div class="col-md-9" style="font-size:1.5em">
+	  	<div class="row" >
+	  		<div class="col-md-4">姓名:张仔剑</div>
+	  		<div class="col-md-5">求职目标:PHP开发工程师</div>
+	  		<div class="col-md-3">性别:男 </div>
+	  	</div>
+	  	<div class="row" style="padding-top:15px">
+	  		<div class="col-md-4">毕业学校:北京林业大学</div>
+	  		<div class="col-md-5">专业:计算机科学与技术</div>
+	  		<div class="col-md-3">英语:六级 </div>
+	  	</div>
+	  	<div class="row" style="padding-top:15px">
+	  		<div class="col-md-4">联系方式:15810764233</div>
+	  		<div class="col-md-5">e-mail:wuhanzaizai#126.com</div>
+	  		<div class="col-md-2">籍贯:湖北</div>
+	  	</div>
+	  	<div class="row" style="padding-top:15px">
+	  		<div class="col-md-4">出生年月:1989-04</div>
+	  		<div class="col-md-5">微博:<a href="http://weibo.com/bjfuzzj/" target="_BLANK">http://weibo.com/bjfuzzj/</a></div>
+	  		
+	  	</div>
+	  	<div class="row" style="padding-top:15px">
+	  		<div class="col-md-6">技术博客:<a href="http://phperzj.sinaapp.com/" target="_BLANK">http://phperzj.sinaapp.com/</a></div>
+	  	</div>
+	  	<div class="row" style="padding-top:15px">
+	  		<div class="col-md-7">工作日志:<a href="http://bjfuzzj.github.io/workdiary/" target="_BLANK">http://bjfuzzj.github.io/workdiary/</a></div>
+	  	</div>
+	  </div>
+	  <!--
 		<p class="lead">
-			姓名:张仔剑 &nbsp;|&nbsp; 求职目标：PHP开发工程师 &nbsp;|&nbsp; 性别:男 <br>
+		
+		
+			  		姓名:张仔剑 &nbsp;|&nbsp; 求职目标：PHP开发工程师 &nbsp;|&nbsp; 性别:男 <br>
 			毕业学校:北京林业大学 &nbsp;|&nbsp; 专业:计算机科学与技术&nbsp;|&nbsp;英语:六级 <br>
 			联系方式:15810764233 &nbsp;|&nbsp; e-mail：wuhanzaizai＠126.com<br>
 			出生年月:1989-04 &nbsp;|&nbsp; 籍贯：湖北<br>
-			个人技术博客：http://phperzj.sinaapp.com/<br>
-			新浪微博：http://weibo.com/bjfuzzj/
+			个人技术博客：<a href="http://phperzj.sinaapp.com/" target="_BLANK">http://phperzj.sinaapp.com/</a><br>
+			工作日志：<a href="http://bjfuzzj.github.io/workdiary/" target="_BLANK">http://bjfuzzj.github.io/workdiary/</a><br>
+			新浪微博：<a href="http://weibo.com/bjfuzzj/" target="_BLANK">http://weibo.com/bjfuzzj/</a><br>
+	
 		</p>
+		-->
 		<div class="clear"></div>
 	</div>
 	
@@ -280,6 +318,12 @@
  
 <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="javascripts/colorbox.js"></script>
 <script type="text/javascript" src="javascripts/timeliner.min.js"></script>
