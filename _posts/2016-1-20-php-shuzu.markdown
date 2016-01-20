@@ -11,6 +11,7 @@ summary: "php数组"
 
 一维数组
 测试一下输出的内容是什么
+
 ```
 $shuzu=array();
 $shuzi1=array('one','two','three');
