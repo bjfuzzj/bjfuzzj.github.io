@@ -2,7 +2,7 @@
 layout: post
 category: "PHP"
 title:  "PHP数组基础知识"
-tags: [数组,php]
+tags: [php]
 summary: "php数组"
 ---
 ###基本定义
