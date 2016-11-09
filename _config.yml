@@ -12,7 +12,7 @@ paginate_path: "page:num"
 # presonal config
 # domain: www.panxw.com
 title: Thornbird's Blog
-description: PHP
+description: 
 author: thornbird
 email: wuhanzaizai#126.com
 github: bjfuzzj
