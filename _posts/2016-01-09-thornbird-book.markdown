@@ -5,7 +5,6 @@ title:  "thornbird的书单"
 tags: [book]
 summary: "thornbird的书单"
 ---
-###thornbird的书单
 
 练习
 
