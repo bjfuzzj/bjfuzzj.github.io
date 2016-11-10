@@ -7,6 +7,7 @@ summary: ""
 ---
 
 今天碰到这样的函数功能，本意是是想过滤掉有敏感信息的书籍。先调用一个方法判断是否有敏感书籍的存在，如果存在就重新过滤，如果不存在就直接返回书籍数组，具体代码如下:
+
 ```
      public function getSensitiveBookId($bookList)
      {
