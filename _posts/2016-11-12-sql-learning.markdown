@@ -45,7 +45,10 @@ SELECT列表
 如果在查询中指定了DISTINCT子句，则会创建一张内存临时表（如果内存放不下，就需要存放在硬盘了）。这张临时表的表结构和上一步产生的虚拟表VT7是一样的，不同的是对进行DISTINCT操作的列增加了一个唯一索引，以此来除重复数据。
 由于我的测试SQL语句中并没有使用DISTINCT，所以，在该查询中，这一步不会生成一个虚拟表。
 
-=======后续继续补充=====http://www.jellythink.com/archives/924
+=======后续继续补充=====
+
+http://www.jellythink.com/archives/924
+
 执行ORDER BY子句
 对虚拟表中的内容按照指定的列进行排序，然后返回一个新的虚拟表，我们执行测试SQL语句中的ORDER BY total_orders DESC
 执行LIMIT子句

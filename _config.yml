@@ -2,16 +2,15 @@ markdown: redcarpet
 permalink: /:categories/:title.html
 url: 
 lsi: false
-pygments: true
-safe: true
-auto: false 
-
+highlighter: pygments
+#safe: true
+gems: [jekyll-paginate]
 paginate: 8
-paginate_path: "page:num"
+paginate_path: "page:num/"
 
 # presonal config
 # domain: www.panxw.com
-title: Thornbird's Blog
+title: Thornbird Blog
 description: 
 author: thornbird
 email: wuhanzaizai#126.com
