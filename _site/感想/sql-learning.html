@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="sql 执行顺序 - Thornbird Blog - thornbird(wuhanzaizai#126.com)">
+    <title>
+      sql 执行顺序 - Thornbird Blog
+    </title>
+    <!-- Bootstrap Core CSS -->
+    <!--<link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="//cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/blog.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+        <!-- jQuery Version 1.11.0 -->
+        <!-- <script src="/js/jquery-1.11.0.js"> </script> -->
+    <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <!-- <script src="/js/bootstrap.min.js"></script> -->
+    <script src="//cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!--
+<link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized_dark.min.css">
+<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+-->
+  </head>
+  
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="/index.html">
+            Thornbird Blog
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+            <li>
+              <a href="/categories.html">
+                分 类
+              </a>
+            </li>
+            <li>
+              <a href="/tags.html">
+                标 签
+              </a>
+            </li>
+            <li>
+              <a href="/archives.html">
+                归 档
+              </a>
+            </li>
+            <li>
+              <a href="/faqs.html">
+                备 忘
+              </a>
+            </li>
+            <li>
+              <a href="/about.html">
+                关 于
+              </a>
+            </li>
+          </ul> 
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <!-- Blog Post -->
+<!-- Title -->
+<h2>
+  sql 执行顺序
+  <div class="post-date"><a href="https://github.com/bjfuzzj/bjfuzzj.github.com/edit/master/_posts/2016-11-12-sql-learning.markdown" target="_blank">纠错</a>&nbsp;&nbsp;
+	<span class="glyphicon glyphicon-time"></span>
+	12 Nov 2016
+  </div>
+</h2>
+<!-- Author -->
+<hr>
+<p>在学习mysql 索引之前，很有必要知道sql的执行顺序，对分析和使用索引有很大的帮助</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">(7)     SELECT 
+(8)     DISTINCT &lt;select_list&gt;
+(1)     FROM &lt;left_table&gt;
+(3)     &lt;join_type&gt; JOIN &lt;right_table&gt;
+(2)     ON &lt;join_condition&gt;
+(4)     WHERE &lt;where_condition&gt;
+(5)     GROUP BY &lt;group_by_list&gt;
+(6)     HAVING &lt;having_condition&gt;
+(9)     ORDER BY &lt;order_by_condition&gt;
+(10)    LIMIT &lt;limit_number&gt;
+</code></pre></div>
+<p>执行from语句<br>
+在这些SQL语句的执行过程中，都会产生一个虚拟表，用来保存SQL语句的执行结果（这是重点），我现在就来跟踪这个虚拟表的变化，得到最终的查询结果的过程，来分析整个SQL逻辑查询的执行顺序和过程。
+第一步，执行FROM语句。我们首先需要知道最开始从哪个表开始的，这就是FROM告诉我们的。现在有了<left_table>和<right_table>两个表，我们到底从哪个表开始，还是从两个表进行某种联系以后再开始呢？它们之间如何产生联系呢？——笛卡尔积</p>
+
+<p>执行ON过滤
+执行完笛卡尔积以后，接着就进行ON a.customer<em>id = b.customer</em>id条件过滤，根据ON中指定的条件，去掉那些不符合条件的数据，得到VT2表(我才知道先执行连表，然后进行on条件过滤，擦,万一第一个表很大，直接连死了，这里还有一个问题，是大表放在前面还是小表放在前面。在mysql高性能书中又看到过讨论这个点有点忘了。)</p>
+
+<p>执行WHERE过滤
+对添加外部行得到的VT3进行WHERE过滤，只有符合<where_condition>的记录才会输出到虚拟表VT4中。当我们执行WHERE a.city = &#39;hangzhou&#39;的时候，就会得到以下内容，并存在虚拟表VT4中;(这里涉及到一个疑问，如果没有使用where语句，但是，有order by 语句的时候 会走索引么？主键索引会走，其他索引不会。)
+    由于数据还没有分组，因此现在还不能在WHERE过滤器中使用where_condition=MIN(col)这类对分组统计的过滤；
+    由于还没有进行列的选取操作，因此在SELECT中使用列的别名也是不被允许的，如：SELECT city as c FROM t WHERE c=&#39;shanghai&#39;;是不允许出现的。</p>
+
+<p>执行GROUP BY分组
+GROU BY子句主要是对使用WHERE子句得到的虚拟表进行分组操作,得到的内容会存入虚拟表VT5中，此时，我们就得到了一个VT5虚拟表，接下来的操作都会在该表上完成。</p>
+
+<p>执行HAVING过滤
+HAVING子句主要和GROUP BY子句配合使用，对分组得到的VT5虚拟表进行条件过滤</p>
+
+<p>SELECT列表
+现在才会执行到SELECT子句，不要以为SELECT子句被写在第一行，就是第一个被执行的(select 的列会涉及到回表查询，如果select 的列是索引列会直接使用覆盖索引)。</p>
+
+<p>执行DISTINCT子句
+如果在查询中指定了DISTINCT子句，则会创建一张内存临时表（如果内存放不下，就需要存放在硬盘了）。这张临时表的表结构和上一步产生的虚拟表VT7是一样的，不同的是对进行DISTINCT操作的列增加了一个唯一索引，以此来除重复数据。
+由于我的测试SQL语句中并没有使用DISTINCT，所以，在该查询中，这一步不会生成一个虚拟表。</p>
+
+<p>=======后续继续补充=====</p>
+
+<p>http://www.jellythink.com/archives/924</p>
+
+<p>执行ORDER BY子句
+对虚拟表中的内容按照指定的列进行排序，然后返回一个新的虚拟表，我们执行测试SQL语句中的ORDER BY total_orders DESC
+执行LIMIT子句</p>
+
+<ol>
+<li>如果书籍中是有敏感书籍的，需要先在getSensitiveBookId方法中遍历几次,然后再在getBooksWithOutSens方法中 全量遍历N次，总计N+M次(M为敏感书籍的位置)。</li>
+<li>如果书籍中是没有敏感书籍的，需要先在getSensitiveBookId方法中遍历遍历N次，然后在getBooksWithOutSens方法中，遍历0次，总计N次。</li>
+<li>整体看来最少要遍历N次，那么为何不直接遍历呢。</li>
+<li>判断是否存在的目的是减少遍历次数，以后自己使用也要注意。</li>
+</ol>
+
+<br/>
+<div style="margin-top:10px;margin-bottom:10px">
+  
+  <span class="next">
+    上篇：
+    <a href="/%E6%84%9F%E6%83%B3/install-jekyll.html">
+      本地安装jekyll踩到的坑
+    </a>
+  </span>
+   
+  
+</div>
+<hr>
+<!-- Blog Comments -->
+<div class="media">
+  <!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2019294"></script>
+<!-- UY END -->
+ 
+</div>
+
+        </div>
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <!-- Blog Search Well -->
+          <div class="well">
+            <h4>
+              站内搜索
+            </h4>
+                        <form action="https://www.egeso.com/" method="get">
+              <div class="input-group">
+                <input type="text" name="q" class="form-control">
+				<input type="hidden" name="ie" value="UTF-8" />
+				<input type="hidden" name="sitesearch" value="" />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search">
+                    </span>
+                  </button>
+                </span>
+              </div>
+            </form>
+ 
+            <!-- /.input-group -->
+          </div>
+          <!-- Blog Categories Well -->
+          <div class="well">
+            <h4>
+              分 类
+            </h4>
+            <div class="row">
+                            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/categories.html#书单">
+                     书单
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/categories.html#好物分享">
+                      好物分享
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/categories.html#交易">
+                      交易
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/categories.html#感想">
+                      感想
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.col-lg-6
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="/categories.html#java">
+                      Java开发
+                    </a>
+                  </li>                  
+		  <li>
+                    <a href="/categories.html#cocos2d">
+                      Cocos2d开发
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/categories.html#web">
+                      Web开发
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/categories.html#network">
+                      网络相关
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              col-lg-6 -->
+ 
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- Blog Links Well -->
+          <div class="well">
+            <h4>
+              相关链接
+            </h4>
+            <!--            
+<ul class="list-unstyled">
+              <li>
+                <a href="http://blog.chinaunix.net/uid/22985736.html">
+                  CuBlog
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="https://bitbucket.org/">
+                  Bitbucket.org
+                </a>
+              </li> 
+               <li>
+                <a href="https://news.ycombinator.com/">
+                  Hacker News
+                </a>
+              </li>        
+              <li>
+                <a href="http://www.stackoverflow.com/">
+                  Stack Overflow
+                </a>
+              </li>
+              <li>
+                <a href="http://developer.android.com/">
+                  Android Developer
+                </a>
+              </li>
+              <li>
+                <a href="http://blog.jobbole.com/">
+                  Jobbole
+                </a>
+              </li>
+              <li>
+                <a href="http://99u.com/">
+                  99U
+                </a>
+              </li>
+              <li>
+                <a href="http://www.ruanyifeng.com/blog/">
+                  Ruanyifeng's Blog
+                </a>
+              </li>
+              <li>
+                <a href="http://www.panxuewen.com">
+                  Panxw's Blog
+                </a>
+              </li>				  
+            </ul>
+-->
+ 
+          </div>
+          <!-- Side Widget Well -->
+          <div class="well">
+                    <!--    
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+            </script>
+            <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px"
+            data-ad-client="ca-pub-3557776493079475" data-ad-slot="3861947889">
+            </ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+-->
+ 
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <hr>
+      <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+                        <p align="center">
+				Copyright &copy; , hosted on <a href="https://github.com">GitHub</a>, powered by Jekyll, designed by <a href="https://github.com/panxw">panxw</a>. <a href="https://github.com/bjfuzzj/bjfuzzj.github.com">[source]</a>
+				<br/>
+				 <a href="/atom.xml">[Feed]</a>
+            </p>
+ 
+          </div>
+          <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+		 
+      </footer>
+    </div>
+    <!-- /.container -->
+  </body>
+
+</html>
