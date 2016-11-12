@@ -1,6 +1,6 @@
 ---
 layout: post
-category: "mysql学习"
+category: "感想"
 title:  "sql 执行顺序"
 tags: [mysql]
 summary: "可以补充学习"
