@@ -4,12 +4,29 @@
  <title>Thornbird Blog</title>
  <link href="http:///atom.xml" rel="self"/>
  <link href="http://"/>
- <updated>2016-11-12T20:57:14+08:00</updated>
+ <updated>2016-11-14T23:06:16+08:00</updated>
  <author>
    <name>thornbird</name>
    <email>wuhanzaizai#126.com</email>
  </author>
 
+ 
+ <entry>
+   <title>使用bootstrap datatimepicker</title>
+   <link href="http:///%E6%84%9F%E6%83%B3/usebootstrap-datatimepicker.html"/>
+   <updated>2016-11-14T00:00:00+08:00</updated>
+   <id>/%E6%84%9F%E6%83%B3/usebootstrap-datatimepicker</id>
+   <content type="html">&lt;p&gt;因为是bootstrap V3，在网上只找到一套可以用的&lt;a href=&quot;https://github.com/Eonasdan/bootstrap-datetimepicker&quot;&gt;bootstrap datetimepicker&lt;/a&gt;，建议使用bower来安装。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装Node.js和cnpm
+第一次使用bower，所以需要先安装Node.js，翻墙安装各种慢，后来才想起来&lt;a href=&quot;https://npm.taobao.org/mirrors/node&quot;&gt;Node.js的淘宝镜像&lt;/a&gt; , 当然 npm也有镜像。另外推荐使用淘宝定制的cnpm，很方便呀，具体地址在&lt;a href=&quot;http://npm.taobao.org/&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;按照&lt;a href=&quot;https://bower.io/&quot;&gt;bower.js&lt;/a&gt;的安装步骤安装bower.js&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装好后继续使用bower安装&lt;a href=&quot;https://github.com/Eonasdan/bootstrap-datetimepicker&quot;&gt;bootstrap datatimepicker&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;至于使用就相当方便，相信安装完后都会使用 ^-^&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>sql 执行顺序</title>
