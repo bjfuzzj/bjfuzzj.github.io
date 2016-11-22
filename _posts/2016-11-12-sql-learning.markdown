@@ -24,6 +24,36 @@ summary: "可以补充学习"
 在这些SQL语句的执行过程中，都会产生一个虚拟表，用来保存SQL语句的执行结果（这是重点），我现在就来跟踪这个虚拟表的变化，得到最终的查询结果的过程，来分析整个SQL逻辑查询的执行顺序和过程。
 第一步，执行FROM语句。我们首先需要知道最开始从哪个表开始的，这就是FROM告诉我们的。现在有了<left_table>和<right_table>两个表，我们到底从哪个表开始，还是从两个表进行某种联系以后再开始呢？它们之间如何产生联系呢？——笛卡尔积
 
+ =-=-=-=- 大表连接小表-=-=-还是小表连接大表?
+ join 关键字:
+ select tbl1.col1, tbl2.col2 from tbl1 inner join tbl2 use(col3)
+ where tbl1.col1 in (5,6);
+
+ outer_iter = iterator over tbl1 col1 in (5,6)      //*_iter 迭代器
+ outer_row = outer_iter.next;
+ while outer_row
+     inner_iter = iterator over tbl2 where col3 = outer_row.col3
+     inner_row = inner_iter.next
+     while inner_row
+         output [inner_row.col2, outer_row.col1]
+         inner_row = inner_iter.next
+     end
+     outer_row = outer_row.next
+ end
+
+
+
+ demo 1 没有where语句:
+     select count(a.id) from intentions as a inner join intentionexts on a.id = intentionexts.intentionid ; 4min
+     select count(a.id) from intentionexts  inner join intentions as a on a.id = intentionexts.intentionid ; 2 min
+
+ demo 2 有where语句:
+
+
+
+
+ -=-=-=-=-=-=-=-=-=-=-=-end-=-=-=-
+
 执行ON过滤
 执行完笛卡尔积以后，接着就进行ON a.customer_id = b.customer_id条件过滤，根据ON中指定的条件，去掉那些不符合条件的数据，得到VT2表(我才知道先执行连表，然后进行on条件过滤，擦,万一第一个表很大，直接连死了，这里还有一个问题，是大表放在前面还是小表放在前面。在mysql高性能书中又看到过讨论这个点有点忘了。)
 
@@ -52,13 +82,4 @@ http://www.jellythink.com/archives/924
 执行ORDER BY子句
 对虚拟表中的内容按照指定的列进行排序，然后返回一个新的虚拟表，我们执行测试SQL语句中的ORDER BY total_orders DESC
 执行LIMIT子句
-
-1. 如果书籍中是有敏感书籍的，需要先在getSensitiveBookId方法中遍历几次,然后再在getBooksWithOutSens方法中 全量遍历N次，总计N+M次(M为敏感书籍的位置)。
-2. 如果书籍中是没有敏感书籍的，需要先在getSensitiveBookId方法中遍历遍历N次，然后在getBooksWithOutSens方法中，遍历0次，总计N次。
-3. 整体看来最少要遍历N次，那么为何不直接遍历呢。
-4. 判断是否存在的目的是减少遍历次数，以后自己使用也要注意。
-
-
- 
-
 
