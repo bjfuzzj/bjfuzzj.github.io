@@ -260,6 +260,7 @@ h3 {
 }
 
 #work .project-card--public {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -278,8 +279,7 @@ h3 {
 .project-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: auto;
   opacity: 0.92;
   transition: opacity 180ms ease, transform 180ms ease;
 }
@@ -481,10 +481,6 @@ footer p {
 
   #work article {
     min-height: auto;
-  }
-
-  .project-media img {
-    aspect-ratio: 16 / 10;
   }
 
   #experience li {

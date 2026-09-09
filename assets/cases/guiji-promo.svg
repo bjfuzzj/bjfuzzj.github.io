@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">谷迹产品宣传视觉</title>
+  <desc id="desc">展示商品机会、选品分析和交易档案的业务工作台</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17231f"/>
+      <stop offset="1" stop-color="#314e43"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c6f36a" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#c6f36a" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#08100d" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1300" cy="40" r="520" fill="url(#glow)"/>
+  <path d="M0 760C260 650 420 780 700 700s440-120 900 20v180H0Z" fill="#0d1714" opacity=".55"/>
+  <g fill="#d9f1d1" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+    <text x="118" y="148" font-size="28" letter-spacing="8" fill="#c6f36a">G U I J I  /  交 易 档 案</text>
+    <text x="112" y="270" font-size="92" font-weight="700">把商品机会</text>
+    <text x="112" y="380" font-size="92" font-weight="700">变成可追踪的增长。</text>
+    <text x="118" y="448" font-size="26" fill="#b8c9c0">选品分析 · 交易记录 · 团队协作</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="760" y="150" width="700" height="560" rx="24" fill="#f5f7f1"/>
+    <rect x="760" y="150" width="700" height="72" rx="24" fill="#e8eee6"/>
+    <circle cx="804" cy="186" r="8" fill="#c6f36a"/><circle cx="832" cy="186" r="8" fill="#9caf9f"/><circle cx="860" cy="186" r="8" fill="#bdc9bf"/>
+    <rect x="900" y="176" width="184" height="20" rx="10" fill="#cbd8cf"/>
+    <rect x="805" y="264" width="168" height="20" rx="10" fill="#50695c"/>
+    <rect x="805" y="312" width="570" height="108" rx="16" fill="#e9f4df"/>
+    <text x="834" y="350" font-size="21" fill="#4d6256" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">本周高潜机会</text>
+    <text x="834" y="394" font-size="46" font-weight="700" fill="#15251e" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">¥ 286,430</text>
+    <polyline points="1090,386 1140,362 1190,375 1240,324 1290,342 1340,290" fill="none" stroke="#6f9d45" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="805" y="456" width="270" height="180" rx="16" fill="#eef1eb"/>
+    <rect x="1105" y="456" width="270" height="180" rx="16" fill="#eef1eb"/>
+    <text x="834" y="495" font-size="20" fill="#50655a" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">热度增长</text>
+    <text x="834" y="555" font-size="42" font-weight="700" fill="#172c22" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">+38.6%</text>
+    <rect x="834" y="582" width="170" height="10" rx="5" fill="#c6f36a"/>
+    <text x="1134" y="495" font-size="20" fill="#50655a" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">已沉淀档案</text>
+    <text x="1134" y="555" font-size="42" font-weight="700" fill="#172c22" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif">1,284</text>
+    <rect x="1134" y="582" width="170" height="10" rx="5" fill="#9fb9aa"/>
+  </g>
+  <g fill="#c6f36a" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18" letter-spacing="3">
+    <text x="118" y="790">PRODUCT SYSTEM / 2026</text>
+    <text x="1305" y="790">BJFUZZJ</text>
+  </g>
+</svg>
