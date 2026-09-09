@@ -10,7 +10,6 @@
   const setOpen = (isOpen) => {
     menuButton.setAttribute('aria-expanded', String(isOpen));
     header.toggleAttribute('data-open', isOpen);
-    navigation.toggleAttribute('data-open', isOpen);
   };
 
   header.classList.add('js-enabled');

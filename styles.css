@@ -19,7 +19,6 @@ html {
 }
 
 body {
-  min-width: 320px;
   margin: 0;
   color: var(--paper);
   background: var(--ink);
@@ -226,7 +225,7 @@ h3 {
 
 #work {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1px;
   padding: 1px;
   background: var(--line);
@@ -238,6 +237,7 @@ h3 {
 }
 
 #work article {
+  min-width: 0;
   min-height: 15rem;
   padding: clamp(1.25rem, 3vw, 2rem);
   background: var(--panel);
@@ -259,50 +259,10 @@ h3 {
   color: var(--signal);
 }
 
-#work .project-card--public {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-}
-
-#work .project-card--public:hover {
-  border-left-color: var(--signal);
-}
-
-.project-media {
-  margin: 0;
-  background: #202b26;
-  border-bottom: 1px solid var(--line);
-}
-
-.project-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  opacity: 0.92;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-.project-card--public:hover .project-media img {
-  opacity: 1;
-  transform: scale(1.015);
-}
-
-.project-media figcaption {
-  padding: 0.55rem 1.25rem;
-  color: var(--muted);
-  background: #18211d;
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-}
-
 .project-card__body {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  min-width: 0;
 }
 
 .project-status {
@@ -311,6 +271,36 @@ h3 {
   font-size: 0.7rem !important;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.project-meta {
+  color: var(--paper) !important;
+  font-size: 0.95rem !important;
+}
+
+.project-description {
+  max-width: 60rem;
+  margin-bottom: 1.25rem !important;
+  color: var(--muted) !important;
+  font-size: 1rem !important;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-tags li {
+  padding: 0.18rem 0.5rem;
+  color: var(--signal);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
 }
 
 .project-actions {
@@ -326,13 +316,6 @@ h3 {
   padding: 0.55rem 0.8rem;
   border: 1px solid var(--signal);
   text-decoration: none;
-}
-
-.project-card--private > .project-status {
-  display: inline-block;
-  width: fit-content;
-  padding: 0.2rem 0.45rem;
-  border: 1px solid var(--line);
 }
 
 #experience ol {
